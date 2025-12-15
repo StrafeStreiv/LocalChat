@@ -1,0 +1,50 @@
+## .NET ##
+*.swp
+*.[oa]
+*~
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# User-specific files
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Docker
+docker-compose.override.yml
+
+# Local settings
+appsettings.Development.json
+appsettings.Local.json
+
+# SQL Server files
+*.mdf
+*.ldf
+
+# RabbitMQ
+*.pid
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

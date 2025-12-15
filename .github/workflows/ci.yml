@@ -1,0 +1,45 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Restore dependencies (AuthService)
+      run: dotnet restore src/AuthService/AuthService.csproj
+
+    - name: Restore dependencies (ChatService)
+      run: dotnet restore src/ChatService/ChatService.csproj
+
+    - name: Restore dependencies (RealtimeHub)
+      run: dotnet restore src/RealtimeHub/RealtimeHub.csproj
+
+    - name: Build AuthService
+      run: dotnet build src/AuthService/AuthService.csproj --configuration Release --no-restore
+
+    - name: Build ChatService
+      run: dotnet build src/ChatService/ChatService.csproj --configuration Release --no-restore
+
+    - name: Build RealtimeHub
+      run: dotnet build src/RealtimeHub/RealtimeHub.csproj --configuration Release --no-restore
+
+    - name: Create Docker images locally
+      run: |
+        echo "Docker images would be built in production:"
+        echo "docker build -t auth-service:latest src/AuthService"
+        echo "docker build -t chat-service:latest src/ChatService"
+        echo "docker build -t realtime-hub:latest src/RealtimeHub"
